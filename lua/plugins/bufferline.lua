@@ -14,7 +14,12 @@ return {
             require("mini.bufremove").delete(n, false)
           end,
           -- stylua: ignore
-          separator_style = "slant",
+          themable = true,
+          show_close_icon = false,
+          indicator = {
+            style = "underline"
+          },
+					separator_style = "slope",
 					diagnostics = "nvim_lsp",
 					always_show_bufferline = true,
 					--- count is an integer representing total count of errors
@@ -33,6 +38,30 @@ return {
 							text = "Neo-tree",
 							highlight = "Directory",
 							text_align = "left",
+						},
+					},
+					highlights = {
+						separator = {
+							fg = { attribute = "bg", highlight = "StatusLine" },
+							bg = { attribute = "bg", highlight = "BufferlineInactive" },
+						},
+						separator_visible = {
+							fg = { attribute = "bg", highlight = "StatusLine" },
+						},
+						-- Tabs
+						tab = {
+							fg = { attribute = "bg", highlight = "StatusLineComment" },
+							bg = { attribute = "bg", highlight = "BufferlineInactive" },
+						}, --inactiveBg,
+						tab_separator = {
+							fg = { attribute = "bg", highlight = "StatusLine" },
+							bg = { attribute = "bg", highlight = "BufferlineInactive" },
+						},
+						tab_separator_selected = {
+							fg = { attribute = "bg", highlight = "StatusLine" },
+						},
+						tab_close = {
+							bg = "yellow",
 						},
 					},
 				},

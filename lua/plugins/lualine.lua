@@ -6,6 +6,7 @@ return {
 			options = {
 				theme = "catppuccin",
 				globalstatus = true, -- only want 1 status line
+				icons_enabled = true,
 			},
 		})
 	end,
