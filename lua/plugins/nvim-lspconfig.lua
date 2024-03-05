@@ -25,15 +25,17 @@ local config = function()
 		mapkey("gD", "Lspsaga goto_definition", "n", opts)
 		mapkey("gd", "Lspsaga peek_definition", "n", opts)
 		mapkey("gi", "Lspsaga goto_implementation", "n", opts)
+		mapkey("gt", "Lspsaga goto_type_definition", "n", opts)
 		mapkey("K", "Lspsaga hover_doc", "n", opts)
+		mapkey("<leader>lo", "Lspsaga outline", "n", opts)
 
 		mapkey("<leader>ca", "Lspsaga code_action", "n", opts)
 		mapkey("<leader>rn", "Lspsaga rename", "n", opts)
-		mapkey("<leader>D", "Lspsaga show_line_diagnostics", "n", opts)
-		mapkey("<leader>d", "Lspsaga show_cursor_diagnostics", "n", opts)
+
+		-- mapkey("<leader>D", "Lspsaga show_line_diagnostics", "n", opts)
+		-- mapkey("<leader>d", "Lspsaga show_cursor_diagnostics", "n", opts)
 		mapkey("<leader>pd", "Lspsaga diagnostic_jump_prev", "n", opts)
 		mapkey("<leader>nd", "Lspsaga diagnostic_jump_next", "n", opts)
-		mapkey("<leader>lo", "LSoutlineTogg", "n", opts)
 
 		-- typescript specific keymaps
 	end
@@ -59,14 +61,14 @@ local config = function()
 		},
 	})
 
-  -- json
-  lspconfig.jsonls.setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
-    filetypes = {
-      "json",
-    }
-  })
+	-- json
+	lspconfig.jsonls.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		filetypes = {
+			"json",
+		},
+	})
 
 	-- typescript LSP
 	lspconfig.tsserver.setup({
@@ -98,13 +100,33 @@ local config = function()
 	lspconfig.emmet_ls.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
-		filteypes = {
+		filetypes = {
 			"typescriptreact",
 			"javascriptreact",
 			"javascript",
 			"css",
 			"svelte",
 			"html",
+		},
+	})
+
+	-- rust
+	lspconfig.rust_analyzer.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		filetypes = {
+			"rust",
+		},
+		settings = {
+			["rust-analyzer"] = {
+				cargo = {
+					allFeatures = true,
+				},
+				checkOnSave = {
+					command = "clippy",
+					allTargets = false,
+				},
+			},
 		},
 	})
 

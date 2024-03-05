@@ -3,15 +3,47 @@ return {
 	lazy = false,
 	config = function()
 		require("lspsaga").setup({
-			-- keybinds for navigation in lspsaga window
-			move_in_saga = { prev = "<C-k>", next = "<C-j>" },
-			-- use enter to open file with finder
-			finder_action_keys = {
-				open = "<CR>",
+			ui = {
+				code_action = "󰉂",
+				actionfix = "󰉂",
 			},
-			-- use enter to open file with definition preview
-			definition_action_keys = {
-				edit = "<CR>",
+			diagnostic = {
+				extend_relatedInformation = true,
+				extend_gitsigns = true,
+				show_source = true,
+			},
+			symbol_in_winbar = {
+				enable = false,
+			},
+			finder = {
+				keys = {
+					vsplit = "v",
+				},
+			},
+			lightbulb = {
+				sign = true,
+				virtual_text = false,
+			},
+			code_action = {
+				extend_gitsigns = true,
+				only_in_cursor = false,
+			},
+			callhierarchy = {
+				keys = {
+					-- toggle_or_req = "<cr>",
+					toggle_or_req = "<cr>",
+					edit = "o", -- open file
+				},
+			},
+			outline = {
+				win_position = "right",
+				close_after_jump = true,
+				auto_close = true,
+				-- detail = false,
+				keys = {
+					jump = "e",
+					toggle_or_jump = "o",
+				},
 			},
 		})
 	end,

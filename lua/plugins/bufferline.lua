@@ -71,6 +71,7 @@ return {
 			-- set keybinds
 			mapkey("<tab>", "BufferLineCycleNext", "n", opts)
 			mapkey("<S-tab>", "BufferLineCyclePrev", "n", opts)
+			mapkey("<leader>fn", "enew", "n", opts)
 		end,
 	},
 }

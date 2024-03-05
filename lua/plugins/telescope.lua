@@ -12,7 +12,7 @@ return {
     telescope.setup({
       defaults = {
         mappings = {
-          i = {
+          n = {
             ["<C-j>"] = "move_selection_next",
             ["<C-k>"] = "move_selection_previous",
             ["<C-h>"] = "which_key",
@@ -23,7 +23,7 @@ return {
         find_files = {
           theme = "dropdown",
           previewer = true,
-          hidden = true,
+          hidden = false,
         },
         live_grep = {
           theme = "dropdown",
