@@ -16,7 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 vim.api.nvim_create_autocmd("TextYankPost", {
 	group = vim.api.nvim_create_augroup("ConfigGroup", { clear = true }),
 	pattern = "*",
-	command = "lua vim.highlight.on_yank({ higroup = 'Substitute', timeout = 350 })",
+	command = "lua vim.highlight.on_yank({ higroup = 'Substitute', timeout = 400 })",
 })
 
 require("config.globals")
@@ -30,9 +30,6 @@ local opts = {
 	defaults = {
 		lazy = true,
 	},
-	-- install = {
-		-- colorscheme = { "catppuccin" },
-	-- },
 	rtp = {
 		disabled_plugins = {
 			"gzip",
