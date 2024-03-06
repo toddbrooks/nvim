@@ -9,19 +9,21 @@ return {
 		config = function()
 			require("bufferline").setup({
 				options = {
+					always_show_bufferline = true,
+					separator_style = "none",
+					show_tab_indicators = false,
+					show_close_icon = false,
+          close_icon = "",
           -- stylua: ignore
-          close_command = function(n)
-            require("mini.bufremove").delete(n, false)
-          end,
+          -- close_command = function(n)
+            -- require("mini.bufremove").delete(n, false)
+          -- end,
           -- stylua: ignore
           themable = true,
-          show_close_icon = false,
-          indicator = {
-            style = "underline"
-          },
-					separator_style = "slope",
+					indicator = {
+						style = "underline",
+					},
 					diagnostics = "nvim_lsp",
-					always_show_bufferline = true,
 					--- count is an integer representing total count of errors
 					--- level is a string "error" | "warning"
 					--- diagnostics_dict is a dictionary from error level
@@ -36,7 +38,7 @@ return {
 						{
 							filetype = "neo-tree",
 							text = "Neo-tree",
-							highlight = "Directory",
+							highlight = "StatusLine",
 							text_align = "left",
 						},
 					},

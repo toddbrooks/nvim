@@ -101,9 +101,9 @@ local config = function()
 		capabilities = capabilities,
 		on_attach = on_attach,
 		filetypes = {
-			"typescriptreact",
-			"javascriptreact",
-			"javascript",
+			-- "typescriptreact",
+			-- "javascriptreact",
+			-- "javascript",
 			"css",
 			"svelte",
 			"html",
