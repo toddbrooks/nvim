@@ -1,7 +1,8 @@
 return {
 	"echasnovski/mini.animate",
 	version = "*",
-	lazy = false,
+	event = "BufEnter",
+	--
 	config = function()
 		require("mini.animate").setup()
 	end,

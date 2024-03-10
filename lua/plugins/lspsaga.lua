@@ -1,11 +1,27 @@
 return {
-	"glepnir/lspsaga.nvim",
-	lazy = false,
+	-- "glepnir/lspsaga.nvim",
+	"nvimdev/lspsaga.nvim",
+	event = "InsertEnter",
+	dependencies = {
+		"nvim-treesitter/nvim-treesitter",
+		"nvim-tree/nvim-web-devicons",
+	},
+	--
 	config = function()
 		require("lspsaga").setup({
 			ui = {
-				code_action = "󰉂",
+				code_action = "💡",
 				actionfix = "󰉂",
+				expand = "⊞",
+				imp_sign = "󰳛 ",
+			},
+			beacon = {
+				enable = true,
+				frequency = 7,
+			},
+			scroll_preview = {
+				scroll_down = "<C-f>",
+				scroll_up = "<C-b>",
 			},
 			diagnostic = {
 				extend_relatedInformation = true,
@@ -47,7 +63,4 @@ return {
 			},
 		})
 	end,
-	dependencies = {
-		"nvim-treesitter/nvim-treesitter",
-	},
 }

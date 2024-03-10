@@ -1,10 +1,11 @@
 return {
-  "windwp/nvim-autopairs",
-  event = "InsertEnter",
-  lazy = false,
-  config = function()
-    require("nvim-autopairs").setup({
-  -- opts go here
-    })
-  end
+	"windwp/nvim-autopairs",
+	lazy = false,
+	event = "InsertEnter",
+	--
+	config = function()
+		require("nvim-autopairs").setup({
+			-- opts go here
+		})
+	end,
 }

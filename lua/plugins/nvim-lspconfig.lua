@@ -179,7 +179,6 @@ end
 
 return {
 	"neovim/nvim-lspconfig",
-	config = config,
 	lazy = false,
 	dependencies = {
 		"windwp/nvim-autopairs",
@@ -189,4 +188,6 @@ return {
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-buffer",
 	},
+	--
+	config = config,
 }
