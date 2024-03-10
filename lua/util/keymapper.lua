@@ -2,7 +2,7 @@ local vim_modes = {
 	n = "n",
 	i = "i",
 	v = "v",
-  t = "t",
+	t = "t",
 }
 
 local default_opts = {
@@ -54,19 +54,6 @@ local mapkey = function(keymaps, command, vimmode, options)
 end
 
 --- @param keymaps string
---- @param command string
---- @param vimmode (string|nil)
---- @param options (table|nil)
---- @return nil
-local mapvimkey = function(keymaps, command, vimmode, options)
-	local mode = get_mode(vimmode)
-	local lhs = keymaps
-	local rhs = get_cmd_string(command)
-	local opts = get_opts(options)
-	vim.keymap.set(mode, lhs, rhs, opts)
-end
-
---- @param keymaps string
 --- @param cmd (function|string)
 --- @param desc (string|nil)
 --- @return table
@@ -78,7 +65,6 @@ local maplazykey = function(keymaps, cmd, desc)
 end
 
 return {
-  mapkey = mapkey,
-	mapvimkey = mapvimkey,
+	mapkey = mapkey,
 	maplazykey = maplazykey,
 }

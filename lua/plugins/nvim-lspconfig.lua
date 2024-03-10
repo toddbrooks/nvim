@@ -32,8 +32,8 @@ local config = function()
 		mapkey("<leader>ca", "Lspsaga code_action", "n", opts)
 		mapkey("<leader>rn", "Lspsaga rename", "n", opts)
 
-		-- mapkey("<leader>D", "Lspsaga show_line_diagnostics", "n", opts)
-		-- mapkey("<leader>d", "Lspsaga show_cursor_diagnostics", "n", opts)
+		mapkey("<leader>D", "Lspsaga show_line_diagnostics", "n", opts)
+		mapkey("<leader>d", "Lspsaga show_cursor_diagnostics", "n", opts)
 		mapkey("<leader>pd", "Lspsaga diagnostic_jump_prev", "n", opts)
 		mapkey("<leader>nd", "Lspsaga diagnostic_jump_next", "n", opts)
 
