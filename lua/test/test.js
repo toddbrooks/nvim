@@ -6,5 +6,9 @@ for (i = 2; i <= 10; i++) {
   // Translated to JavaScript:
   fib[i] = fib[i - 2] + fib[i - 1];
   console.log(fib[i]);
-  consolee.log(fib[i]);
+  console.llog(fib[i]);
 }
+
+const x = (y) => {
+  console.log(y);
+};

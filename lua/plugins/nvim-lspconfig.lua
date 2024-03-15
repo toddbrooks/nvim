@@ -1,133 +1,122 @@
 local mapkey = require("util.keymapper").mapkey
-local diagnostic_signs = require("util.icons").diagnostic_signs
-local typescript_organize_imports = require("util.lsp").typescript_organise_imports
+
+local on_attach = function(client, bufnr)
+	-- keybind options
+	local opts = { noremap = true, silent = true, buffer = bufnr }
+
+	-- set keybinds
+	mapkey("gf", "Lspsaga lsp_finder", "n", opts)
+	mapkey("gD", "Lspsaga goto_definition", "n", opts)
+	mapkey("gd", "Lspsaga peek_definition", "n", opts)
+	mapkey("gi", "Lspsaga goto_implementation", "n", opts)
+	mapkey("K", "Lspsaga hover_doc", "n", opts)
+
+	mapkey("[d", vim.diagnostic.goto_prev, "n", opts)
+	mapkey("]d", vim.diagnostic.goto_next, "n", opts)
+	mapkey("gC", vim.lsp.buf.declaration, "n", opts)
+	mapkey("gr", vim.lsp.buf.references, "n", opts)
+	mapkey("<C-k>", vim.lsp.buf.signature_help, "n", opts)
+	mapkey("gT", vim.lsp.buf.type_definition, "n", opts)
+
+	mapkey("<leader>ca", "Lspsaga code_action", "n", opts)
+	mapkey("<leader>rn", "Lspsaga rename", "n", opts)
+	mapkey("<leader>D", "Lspsaga show_line_diagnostics", "n", opts)
+	mapkey("<leader>d", "Lspsaga show_cursor_diagnostics", "n", opts)
+	mapkey("<leader>pd", "Lspsaga diagnostic_jump_prev", "n", opts)
+	mapkey("<leader>nd", "Lspsaga diagnostic_jump_next", "n", opts)
+	mapkey("<leader>lo", "LSoutlineTogg", "n", opts)
+
+	-- typescript specific keymaps
+	if client.name == "typescript" then
+		-- organization imports
+		mapkey("<leader>oi", "TypeScriptOrganizeImports", "n", opts)
+	end
+
+	-- local keymap = vim.keymap
+	-- local opts = { noremap = true, silent = true, buffer = bufnr }
+	--
+	-- keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+	-- keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+	-- keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+	-- keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+	-- keymap.set("n", "gr", vim.lsp.buf.references, opts)
+	-- keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+	-- keymap.set("n", "K", vim.lsp.buf.hover, opts)
+	-- keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+	-- keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
+	-- keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
+	-- keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
+end
 
 local config = function()
-	require("neoconf").setup({})
-	local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
 	local lspconfig = require("lspconfig")
+	local capabilities = require("cmp_nvim_lsp").default_capabilities()
+	local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 
-	for type, icon in pairs(diagnostic_signs) do
+	for type, icon in pairs(signs) do
 		local hl = "DiagnosticSign" .. type
-		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 	end
 
-	local capabilities = cmp_nvim_lsp.default_capabilities()
-
-	-- enable keybinds only for when lsp server is available
-	local on_attach = function(_, bufnr)
-		-- keybind options
-		local opts = { noremap = false, silent = true, buffer = bufnr }
-
-		-- set keybinds
-		mapkey("gf", "Lspsaga lsp_finder", "n", opts)
-		mapkey("gD", "Lspsaga goto_definition", "n", opts)
-		mapkey("gd", "Lspsaga peek_definition", "n", opts)
-		mapkey("gi", "Lspsaga goto_implementation", "n", opts)
-		mapkey("gt", "Lspsaga goto_type_definition", "n", opts)
-		mapkey("K", "Lspsaga hover_doc", "n", opts)
-		mapkey("<leader>lo", "Lspsaga outline", "n", opts)
-
-		mapkey("<leader>ca", "Lspsaga code_action", "n", opts)
-		mapkey("<leader>rn", "Lspsaga rename", "n", opts)
-
-		mapkey("<leader>D", "Lspsaga show_line_diagnostics", "n", opts)
-		mapkey("<leader>d", "Lspsaga show_cursor_diagnostics", "n", opts)
-		mapkey("<leader>pd", "Lspsaga diagnostic_jump_prev", "n", opts)
-		mapkey("<leader>nd", "Lspsaga diagnostic_jump_next", "n", opts)
-
-		-- typescript specific keymaps
-	end
-
-	-- lua LSP
 	lspconfig.lua_ls.setup({
-		capabilities = capabilities,
 		on_attach = on_attach,
-		settings = {
-			Lua = { -- custom settings for lua
-				-- make the language server recognize the "vim" global
-				diagnostics = {
-					globals = { "vim" },
+		capabalities = capabilities,
+		settings = { -- custom settings for lua
+			Lua = {
+				runtime = {
+					-- tell the language server which version of Lua you're using
+					-- (most likely LuaJIT in the case of Neovim)
+					version = "LuaJIT",
 				},
+				-- make the server aware of Neovim runtime files
 				workspace = {
-					-- make language server aware of runtime files
+					checkThirdParty = false,
 					library = {
-						[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-						[vim.fn.stdpath("config") .. "/lua"] = true,
+						vim.env.VIMRUNTIME,
 					},
 				},
 			},
 		},
 	})
 
-	-- json
-	lspconfig.jsonls.setup({
-		capabilities = capabilities,
-		on_attach = on_attach,
-		filetypes = {
-			"json",
-		},
-	})
-
-	-- typescript LSP
 	lspconfig.tsserver.setup({
 		on_attach = on_attach,
-		capabilities = capabilities,
-		filetypes = {
-			"typescript",
-			"javascript",
-			"typescriptreact",
-			"javascriptreact",
-		},
-		commands = {
-			TypeScriptOrganizeImports = typescript_organize_imports,
-		},
-		root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git"),
+		capabalities = capabilities,
 	})
 
-	-- bash
-	lspconfig.bashls.setup({
-		capabilities = capabilities,
-		on_attach = on_attach,
-		filetypes = {
-			"sh",
-			"aliasrc",
-		},
-	})
+	lspconfig.tailwindcss.setup({})
 
-	-- typescriptreact, javascriptreact, css, svelte
 	lspconfig.emmet_ls.setup({
-		capabilities = capabilities,
 		on_attach = on_attach,
-		filetypes = {
-			-- "typescriptreact",
-			-- "javascriptreact",
-			-- "javascript",
-			"css",
-			"svelte",
-			"html",
-		},
+		capabilities = capabilities,
 	})
 
-	-- rust
-	lspconfig.rust_analyzer.setup({
-		capabilities = capabilities,
+	lspconfig.jsonls.setup({
 		on_attach = on_attach,
-		filetypes = {
-			"rust",
-		},
+		capabilities = capabilities,
+	})
+
+	lspconfig.pyright.setup({
+		on_attach = on_attach,
+		capabilities = capabilities,
 		settings = {
-			["rust-analyzer"] = {
-				cargo = {
-					allFeatures = true,
-				},
-				checkOnSave = {
-					command = "clippy",
-					allTargets = false,
+			pyright = {
+				disableOrganizeImports = false,
+				analysis = {
+					autoImportCompletions = true,
 				},
 			},
 		},
+	})
+
+	lspconfig.bashls.setup({
+		on_attach = on_attach,
+		capabilities = capabilities,
+	})
+
+	lspconfig.dockerls.setup({
+		on_attach = on_attach,
+		capabilities = capabilities,
 	})
 
 	local luacheck = require("efmls-configs.linters.luacheck")
@@ -135,22 +124,27 @@ local config = function()
 	local eslint_d = require("efmls-configs.linters.eslint_d")
 	local prettier_d = require("efmls-configs.formatters.prettier_d")
 	local fixjson = require("efmls-configs.formatters.fixjson")
-	local shellcheck = require("efmls-configs.linters.shellcheck")
 	local shfmt = require("efmls-configs.formatters.shfmt")
+	local black = require("efmls-configs.formatters.black")
 
-	-- configure efm server
 	lspconfig.efm.setup({
 		filetypes = {
 			"lua",
-			"typescript",
-			"json",
-			"sh",
-			"javascript",
-			"javascriptreact",
-			"typescriptreact",
-			"svelte",
 			"html",
 			"css",
+			"javascript",
+			"javascriptreact",
+			"typescript",
+			"typescriptreact",
+			"json",
+			"jsonc",
+			"svelte",
+			"vue",
+			"python",
+			"sh",
+			"docker",
+			"markdown",
+      "yaml",
 		},
 		init_options = {
 			documentFormatting = true,
@@ -163,15 +157,19 @@ local config = function()
 		settings = {
 			languages = {
 				lua = { luacheck, stylua },
-				typescript = { eslint_d, prettier_d },
-				json = { eslint_d, fixjson },
-				sh = { shellcheck, shfmt },
 				javascript = { eslint_d, prettier_d },
 				javascriptreact = { eslint_d, prettier_d },
+				typescript = { eslint_d, prettier_d },
 				typescriptreact = { eslint_d, prettier_d },
 				svelte = { eslint_d, prettier_d },
+				vue = { eslint_d, prettier_d },
 				html = { prettier_d },
 				css = { prettier_d },
+				markdown = { prettier_d },
+				json = { fixjson },
+				jsonc = { fixjson },
+				sh = { shfmt },
+				python = { black },
 			},
 		},
 	})
@@ -179,15 +177,11 @@ end
 
 return {
 	"neovim/nvim-lspconfig",
-	lazy = false,
 	dependencies = {
-		"windwp/nvim-autopairs",
 		"williamboman/mason.nvim",
-		"creativenull/efmls-configs-nvim",
+		"hrsh7th/nvim-cmp",
 		"hrsh7th/cmp-nvim-lsp",
-		"hrsh7th/cmp-path",
-		"hrsh7th/cmp-buffer",
+		"creativenull/efmls-configs-nvim",
 	},
-	--
 	config = config,
 }

@@ -1,7 +1,7 @@
 return {
 	-- "glepnir/lspsaga.nvim",
 	"nvimdev/lspsaga.nvim",
-	event = "InsertEnter",
+	event = "LspAttach",
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter",
 		"nvim-tree/nvim-web-devicons",
