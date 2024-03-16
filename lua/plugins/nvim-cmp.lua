@@ -1,6 +1,6 @@
 return {
 	"hrsh7th/nvim-cmp",
-	event = "InsertEnter",
+	event = "BufReadPre",
 	dependencies = {
 		"L3MON4D3/LuaSnip", -- snippet engine
 		"hrsh7th/cmp-nvim-lsp",
