@@ -1,16 +1,21 @@
 local opts = {
 	ensure_installed = {
 		"bashls",
+		"cssls",
 		"dockerls",
 		"efm",
 		"emmet_ls",
-    "hydra_lsp",
+		"eslint",
 		"jsonls",
 		"lua_ls",
+		"marksman",
 		"pyright",
 		"rust_analyzer",
+		"svelte",
 		"tsserver",
 		"tailwindcss",
+		"tflint",
+		"yamlls",
 	},
 	automatic_installation = true,
 }

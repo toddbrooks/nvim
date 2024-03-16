@@ -122,7 +122,7 @@ local config = function()
 	local luacheck = require("efmls-configs.linters.luacheck")
 	local stylua = require("efmls-configs.formatters.stylua")
 	local eslint_d = require("efmls-configs.linters.eslint_d")
-	local prettier_d = require("efmls-configs.formatters.prettier_d")
+	local prettier_d = require("efmls-configs.formatters.prettier")
 	local fixjson = require("efmls-configs.formatters.fixjson")
 	local shfmt = require("efmls-configs.formatters.shfmt")
 	local black = require("efmls-configs.formatters.black")
@@ -144,7 +144,7 @@ local config = function()
 			"sh",
 			"docker",
 			"markdown",
-      "yaml",
+			"yaml",
 		},
 		init_options = {
 			documentFormatting = true,
