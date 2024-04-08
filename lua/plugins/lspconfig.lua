@@ -92,13 +92,6 @@ return {
           end,
         })
       end,
-      ["graphql"] = function()
-        -- configure graphql language server
-        lspconfig["graphql"].setup({
-          capabilities = capabilities,
-          filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-        })
-      end,
       ["emmet_ls"] = function()
         -- configure emmet language server
         lspconfig["emmet_ls"].setup({
@@ -121,6 +114,55 @@ return {
               },
             },
           },
+        })
+      end,
+      ["cssls"] = function()
+        -- configure css language server
+        lspconfig["cssls"].setup({
+          capabilities = capabilities,
+          filetypes = { "css", "sass", "scss", "less", "svelte" },
+        })
+      end,
+      ["jsonls"] = function()
+        -- configure json language server
+        lspconfig["jsonls"].setup({
+          capabilities = capabilities,
+          filetypes = { "json", "jsonc" },
+        })
+      end,
+      ["tailwindcss"] = function()
+        -- configure tailwindcss language server
+        lspconfig["tailwindcss"].setup({
+          capabilities = capabilities,
+          filetypes = { "html", "css", "scss", "svelte" },
+        })
+      end,
+      ["html"] = function()
+        -- configure html language server
+        lspconfig["html"].setup({
+          capabilities = capabilities,
+          filetypes = { "html", "svelte" },
+        })
+      end,
+      ["yamlls"] = function()
+        -- configure yaml language server
+        lspconfig["yamlls"].setup({
+          capabilities = capabilities,
+          filetypes = { "yaml", "yaml.ansible" },
+        })
+      end,
+      ["bashls"] = function()
+        -- configure bash language server
+        lspconfig["bashls"].setup({
+          capabilities = capabilities,
+          filetypes = { "sh", "bash" },
+        })
+      end,
+      ["tsserver"] = function()
+        -- configure typescript language server
+        lspconfig["tsserver"].setup({
+          capabilities = capabilities,
+          filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
         })
       end,
     })

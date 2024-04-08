@@ -42,5 +42,23 @@ return {
         "pylint", -- python linter
       }
     })
+
+    local lspconfig = require("lspconfig")
+    local configs = require("lspconfig.configs")
+
+		-- setup cfn-lsp-extra
+		if not configs["cfn-lsp-extra"] then
+			configs["cfn-lsp-extra"] = {
+				default_config = {
+					cmd = { "cfn-lsp-extra" },
+					filetypes = { "yaml.cloudformation", "json.cloudformation" },
+					root_dir = function(fname)
+						return lspconfig.util.find_git_ancestor(fname)
+					end,
+					settings = { validation = false },
+				},
+			}
+		end
+		lspconfig["cfn-lsp-extra"].setup({})
   end,
 }
