@@ -1,18 +1,17 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   event = { "BufReadPre", "BufNewFile" },
-  build = ":TSUpdate", dependencies = { "windwp/nvim-ts-autotag",
-  },
+  build = ":TSUpdate",
+  dependencies = { "windwp/nvim-ts-autotag" },
   config = function()
     local treesitter = require("nvim-treesitter.configs")
 
     treesitter.setup({
-      higlight = {
+      sync_install = true,
+      highlight = {
         enable = true,
       },
-      indent = { enable = true },
-      autotag = {
-        enabled = true,
+      modules = {
       },
       ensure_installed = {
         "bash",
@@ -36,19 +35,8 @@ return {
         "vimdoc",
         "yaml",
       },
-      -- Uncommenting the below causes
-      -- the error "E13: File exists (add ! to override)"
-      -- when opening a file with Telescope find_files
-      --
-      --incremental_selection = {
-      --  enable = true,
-      --  keymaps = {
-      --    init_selection = "<C-space>",
-      --    node_selection = "<C-space>",
-      --    scope_incremental = false,
-      --    node_decremental = "<bs>",
-      --  },
-      --},
+      ignore_install = {},
+      auto_install = false,
     })
   end,
 }

@@ -16,7 +16,6 @@ return {
   config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
-    local lspkind = require("lspkind")
 
     require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -45,13 +44,34 @@ return {
         { name = "buffer" }, -- text within current buffer
         { name = "path" }, -- file system paths
       }),
-      -- configure lspkind for vs-code like pictogram in completion menu
-      formatting = {
-        format = lspkind.cmp_format({
-          maxwidth = 50,
-          ellipsis_char = "...",
-        }),
+      window = {
+        completion = {
+          winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+          col_offset = -3,
+          side_padding = 0,
+        },
       },
+      formatting = {
+        format = function(entry, vim_item)
+          local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
+          local strings = vim.split(kind.kind, "%s", { trimempty = true })
+          kind.kind = " " .. (strings[1] or "") .. " "
+          kind.menu = "    (" .. (strings[2] or "") .. ")"
+
+          return kind
+        end,
+        fields = { "kind", "abbr", "menu" },
+        expandable_indicator = true,
+      },
+    })
+
+    luasnip.add_snippets("all", {
+      luasnip.snippet("aws", {
+        luasnip.text_node("AWSTemplateFormatVersion: '2010-09-09'"),
+      }),
+      luasnip.snippet("transform", {
+        luasnip.text_node("Transform: AWS::Serverless-2016-10-31"),
+      }),
     })
   end,
 }
