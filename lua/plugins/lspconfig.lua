@@ -77,6 +77,47 @@ return {
           capabilities = capabilities,
         })
       end,
+
+      ["tsserver"] = function()
+        -- configure typescript language server
+        lspconfig["tsserver"].setup({
+          capabilities = capabilities,
+          filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
+          single_file_support = true,
+          settings = {
+            -- make the language server use the workspace version of typescript
+            typescript = {
+              preferences = {
+                importModuleSpecifierPreference = "relative",
+              },
+              inlayHints = {
+								includeInlayParameterNameHints = "literal",
+								includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+								includeInlayFunctionParameterTypeHints = true,
+								includeInlayVariableTypeHints = false,
+								includeInlayPropertyDeclarationTypeHints = true,
+								includeInlayFunctionLikeReturnTypeHints = true,
+								includeInlayEnumMemberValueHints = true,
+							},
+            },
+            javascript = {
+              preferences = {
+                importModuleSpecifierPreference = "relative",
+              },
+              inlayHints = {
+                includeInlayParameterNameHints = "all",
+                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayVariableTypeHints = true,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayEnumMemberValueHints = true,
+              },
+            },
+          },
+        })
+      end,
+
       ["svelte"] = function()
         -- configure svelte server
         lspconfig["svelte"].setup({
@@ -92,13 +133,15 @@ return {
           end,
         })
       end,
-      ["emmet_ls"] = function()
-        -- configure emmet language server
-        lspconfig["emmet_ls"].setup({
-          capabilities = capabilities,
-          filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
-        })
-      end,
+
+      -- ["emmet_ls"] = function()
+      --   -- configure emmet language server
+      --   lspconfig["emmet_ls"].setup({
+      --     capabilities = capabilities,
+      --     filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+      --   })
+      -- end,
+
       ["lua_ls"] = function()
         -- configure lua server (with special settings)
         lspconfig["lua_ls"].setup({
@@ -116,6 +159,7 @@ return {
           },
         })
       end,
+
       ["cssls"] = function()
         -- configure css language server
         lspconfig["cssls"].setup({
@@ -123,6 +167,7 @@ return {
           filetypes = { "css", "sass", "scss", "less", "svelte" },
         })
       end,
+
       ["jsonls"] = function()
         -- configure json language server
         lspconfig["jsonls"].setup({
@@ -130,6 +175,7 @@ return {
           filetypes = { "json", "jsonc" },
         })
       end,
+
       ["tailwindcss"] = function()
         -- configure tailwindcss language server
         lspconfig["tailwindcss"].setup({
@@ -137,6 +183,7 @@ return {
           filetypes = { "html", "css", "scss", "svelte" },
         })
       end,
+
       ["html"] = function()
         -- configure html language server
         lspconfig["html"].setup({
@@ -144,6 +191,7 @@ return {
           filetypes = { "html", "svelte" },
         })
       end,
+
       ["yamlls"] = function()
         -- configure yaml language server
         lspconfig["yamlls"].setup({
@@ -151,18 +199,12 @@ return {
           filetypes = { "yaml", "yaml.ansible" },
         })
       end,
+
       ["bashls"] = function()
         -- configure bash language server
         lspconfig["bashls"].setup({
           capabilities = capabilities,
           filetypes = { "sh", "bash" },
-        })
-      end,
-      ["tsserver"] = function()
-        -- configure typescript language server
-        lspconfig["tsserver"].setup({
-          capabilities = capabilities,
-          filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
         })
       end,
     })

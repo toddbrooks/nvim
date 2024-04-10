@@ -35,11 +35,17 @@ return {
     mason_tool_installer.setup({
       ensure_installed = {
         "black", -- python formatter
+        "css-lsp",
         "eslint_d",
         "isort", -- python formatter
+        "luacheck", -- lua linter
         "prettier",
+        "shellcheck", -- shell linter
         "stylua", -- lua formatter
         "pylint", -- python linter
+        "tailwindcss-language-server",
+        "typescript-language-server", -- javascript/typescript language server
+
       }
     })
 

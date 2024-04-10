@@ -11,8 +11,8 @@ return {
       highlight = {
         enable = true,
       },
-      modules = {
-      },
+      -- modules = {
+      -- },
       ensure_installed = {
         "bash",
         "c",
@@ -35,8 +35,8 @@ return {
         "vimdoc",
         "yaml",
       },
-      ignore_install = {},
-      auto_install = false,
+      -- ignore_install = {},
+      -- auto_install = false,
     })
   end,
 }
