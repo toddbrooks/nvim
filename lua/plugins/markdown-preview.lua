@@ -8,6 +8,6 @@ return {
     vim.fn["mkdp#util#install"]()
   end,
   config = function()
-    mapkey("<leader>mp", "MarkdownPreviewToggle", "n")
+    mapkey("<leader>mP", "MarkdownPreviewToggle", "n")
   end,
 }

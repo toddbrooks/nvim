@@ -28,7 +28,7 @@ return {
     -- macos_option_as_alt left
 
 		-- Normal mode movement
-		mapkey("<A-j>", "MoveLine(1)", "n", opts)
+    mapkey("<A-j>", "MoveLine(1)", "n", opts)
 		mapkey("<A-k>", "MoveLine(-1)", "n", opts)
 		mapkey("<A-h>", "MoveHChar(-1)", "n", opts)
 		mapkey("<A-l>", "MoveHChar(1)", "n", opts)
