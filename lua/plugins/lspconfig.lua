@@ -210,6 +210,14 @@ return {
           filetypes = { "sh", "bash" },
         })
       end,
+
+      ["terraformls"] = function()
+        -- configure Hashicorp Terraform language server
+        lspconfig["terraformls"].setup({
+          capabilities = capabilities,
+          filetypes = { "terraform" },
+        })
+      end,
     })
   end,
 }

@@ -28,6 +28,7 @@ return {
         "pyright",
         "svelte",
         "tailwindcss",
+        "terraformls",
         "tsserver",
       },
     })
@@ -45,7 +46,6 @@ return {
         "pylint", -- python linter
         "tailwindcss-language-server",
         "typescript-language-server", -- javascript/typescript language server
-
       }
     })
 
