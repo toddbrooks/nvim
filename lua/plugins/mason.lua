@@ -39,6 +39,7 @@ return {
         "css-lsp",
         "eslint_d",
         "isort", -- python formatter
+        "jsonlint", -- json linter
         "luacheck", -- lua linter
         "prettier",
         "shellcheck", -- shell linter
@@ -61,7 +62,30 @@ return {
 					root_dir = function(fname)
 						return lspconfig.util.find_git_ancestor(fname)
 					end,
-					settings = { validation = false },
+					settings = {
+            validation = false,
+            yaml = {
+              customTags = {
+                "!And sequence",
+                "!Base64 scalar",
+                "!Cidr sequence",
+                "!Condition",
+                "!If sequence",
+                "!Equals sequence",
+                "!FindInMap sequence",
+                "!GetAtt scalar",
+                "!GetAZs scalar",
+                "!ImportValue scalar",
+                "!Join sequence scalar",
+                "!Not sequence",
+                "!Or sequence",
+                "!Ref scalar",
+                "!Select sequence",
+                "!Split sequence",
+                "!Sub",
+              },
+            },
+          },
 				},
 			}
 		end

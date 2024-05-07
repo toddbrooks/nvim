@@ -200,6 +200,29 @@ return {
         lspconfig["yamlls"].setup({
           capabilities = capabilities,
           filetypes = { "yaml", "yaml.ansible" },
+          settings = {
+            yaml = {
+              customTags = {
+                "!And sequence",
+                "!Base64 scalar",
+                "!Cidr sequence",
+                "!Condition",
+                "!If sequence",
+                "!Equals sequence",
+                "!FindInMap sequence",
+                "!GetAtt scalar",
+                "!GetAZs scalar",
+                "!ImportValue scalar",
+                "!Join sequence scalar",
+                "!Not sequence",
+                "!Or sequence",
+                "!Ref scalar",
+                "!Select sequence",
+                "!Split sequence",
+                "!Sub scalar",
+              },
+            },
+          },
         })
       end,
 
