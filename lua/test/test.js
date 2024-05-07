@@ -1,14 +1,19 @@
-const i;
-var fib = [0, 1, -1]; // Initialize array!
+const fs = require('fs').promises // use the promisified fs module
+const path = require('path')
 
-for (i = 2; i <= 10; i++) {
-  // Next fibonacci number = previous + one before previous
-  // Translated to JavaScript:
-  fib[i] = fib[i - 2] + fib[i - 1];
-  console.log(fib[i]);
-  console.llog(fib[i]);
+let files = 0 // initiate count to add to
+
+async function countFiles (folderPath) {
+  try {
+    const usablePath = path.resolve(folderPath) // get the full path
+    const contents = await fs.readdir(usablePath) // read the directory
+
+    contents.forEach(() => { files = files + 1 }) // add 1 for every file in the directory
+
+    return files
+  } catch (error) { // this will most likely be triggered if `folderPath` is not a real path.
+    throw new Error(`It seems there was a problem. Are you sure ${folderPath} a valid path?`)
+  }
 }
 
-const x = (y) => {
-  console.log(y);
-};
+module.exports = countFiles
