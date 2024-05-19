@@ -1,6 +1,7 @@
 return {
 	"akinsho/bufferline.nvim",
-	version = "*",
+  -- commented the below line as it was breaking with Neovim 0.10.0
+	-- version = "*",
 	lazy = false,
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
