@@ -45,6 +45,18 @@ return {
           theme = "dropdown",
           previewer = false,
         },
+        -- git_commits = {
+        --   attach_mappings = function(_, map)
+        --     map({ 'i', 'n' }, '<C-b>', function(_,_)
+        --       local entry = require('telescope.actions.state').get_selected_entry()
+        --       require('github-browse.browse').browse_commit { args = entry.value }
+        --     end)
+        --
+        --     -- needs to return true if you want to map default_mappings and
+        --     -- false otherwise
+        --     return true
+        --   end,
+        -- }
       },
     })
 
