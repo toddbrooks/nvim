@@ -199,9 +199,15 @@ return {
         -- configure yaml language server
         lspconfig["yamlls"].setup({
           capabilities = capabilities,
-          filetypes = { "yaml", "yaml.ansible" },
+					filetypes = { "yaml", "yaml.cloudformation", "json.cloudformation" },
           settings = {
             yaml = {
+              schemaStore = {
+                enable = true,
+                url = "https://www.schemastore.org/api/json/catalog.json",
+              },
+              hover = false,
+              validate = true,
               customTags = {
                 "!And sequence",
                 "!Base64 scalar",
@@ -219,7 +225,7 @@ return {
                 "!Ref scalar",
                 "!Select sequence",
                 "!Split sequence",
-                "!Sub scalar",
+                "!Sub sequence scalar",
               },
             },
           },

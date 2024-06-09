@@ -58,13 +58,18 @@ return {
 			configs["cfn-lsp-extra"] = {
 				default_config = {
 					cmd = { "cfn-lsp-extra" },
-					filetypes = { "yaml.cloudformation", "json.cloudformation" },
+					filetypes = { "yaml", "yaml.cloudformation", "json.cloudformation" },
 					root_dir = function(fname)
 						return lspconfig.util.find_git_ancestor(fname)
 					end,
 					settings = {
-            validation = false,
             yaml = {
+              schemaStore = {
+                enable = true,
+                url = "https://www.schemastore.org/api/json/catalog.json",
+              },
+              hover = false,
+              validate = true,
               customTags = {
                 "!And sequence",
                 "!Base64 scalar",
@@ -82,7 +87,7 @@ return {
                 "!Ref scalar",
                 "!Select sequence",
                 "!Split sequence",
-                "!Sub",
+                "!Sub sequence scalar",
               },
             },
           },
