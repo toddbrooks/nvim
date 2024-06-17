@@ -58,7 +58,7 @@ return {
 			configs["cfn-lsp-extra"] = {
 				default_config = {
 					cmd = { "cfn-lsp-extra" },
-					filetypes = { "yaml", "yaml.cloudformation", "json.cloudformation" },
+					filetypes = { "yaml", "yaml.ansible", "yaml.cloudformation", "json.cloudformation" },
 					root_dir = function(fname)
 						return lspconfig.util.find_git_ancestor(fname)
 					end,

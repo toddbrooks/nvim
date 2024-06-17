@@ -199,7 +199,7 @@ return {
         -- configure yaml language server
         lspconfig["yamlls"].setup({
           capabilities = capabilities,
-					filetypes = { "yaml", "yaml.cloudformation", "json.cloudformation" },
+					filetypes = { "yaml", "yaml.ansible", "yaml.cloudformation", "json.cloudformation" },
           settings = {
             yaml = {
               schemaStore = {
