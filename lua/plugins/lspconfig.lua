@@ -81,9 +81,9 @@ return {
         })
       end,
 
-      ["tsserver"] = function()
+      ["ts_ls"] = function()
         -- configure typescript language server
-        lspconfig["tsserver"].setup({
+        lspconfig["ts_ls"].setup({
           capabilities = capabilities,
           filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
           single_file_support = true,
