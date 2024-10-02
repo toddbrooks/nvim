@@ -45,3 +45,5 @@ opt.undofile = true
 opt.backspace = "indent,eol,start"
 opt.autochdir = false
 opt.iskeyword:append("-")
+
+opt.fileformats = "unix,dos,mac"

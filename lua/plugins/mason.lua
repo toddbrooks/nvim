@@ -30,6 +30,7 @@ return {
         "tailwindcss",
         "terraformls",
         "ts_ls",
+        "csharp_ls",
       },
     })
 
