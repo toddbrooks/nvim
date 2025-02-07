@@ -50,6 +50,7 @@ return {
         "typescript-language-server", -- javascript/typescript language server
         "csharpier", -- C# formatter
         "csharp-language-server", -- C# language server
+        "terraform-ls", -- terraform language server
       }
     })
 
