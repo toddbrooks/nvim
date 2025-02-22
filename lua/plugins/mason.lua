@@ -21,6 +21,7 @@ return {
 
     mason_lspconfig.setup({
       ensure_installed = {
+        "csharp_ls",
         "cssls",
         "graphql",
         "html",
@@ -30,7 +31,7 @@ return {
         "tailwindcss",
         "terraformls",
         "ts_ls",
-        "csharp_ls",
+        "vacuum",
       },
     })
 
@@ -51,53 +52,55 @@ return {
         "csharpier", -- C# formatter
         "csharp-language-server", -- C# language server
         "terraform-ls", -- terraform language server
+        "vacuum", -- openapi linter
       }
     })
 
-    local lspconfig = require("lspconfig")
-    local configs = require("lspconfig.configs")
+    -- local lspconfig = require("lspconfig")
+    -- local configs = require("lspconfig.configs")
 
 		-- setup cfn-lsp-extra
-		if not configs["cfn-lsp-extra"] then
-			configs["cfn-lsp-extra"] = {
-				default_config = {
-					cmd = { "cfn-lsp-extra" },
-					filetypes = { "yaml", "yaml.ansible", "yaml.cloudformation", "json.cloudformation" },
-					root_dir = function(fname)
-						return lspconfig.util.find_git_ancestor(fname)
-					end,
-					settings = {
-            yaml = {
-              schemaStore = {
-                enable = true,
-                url = "https://www.schemastore.org/api/json/catalog.json",
-              },
-              hover = false,
-              validate = true,
-              customTags = {
-                "!And sequence",
-                "!Base64 scalar",
-                "!Cidr sequence",
-                "!Condition",
-                "!If sequence",
-                "!Equals sequence",
-                "!FindInMap sequence",
-                "!GetAtt scalar",
-                "!GetAZs scalar",
-                "!ImportValue scalar",
-                "!Join sequence scalar",
-                "!Not sequence",
-                "!Or sequence",
-                "!Ref scalar",
-                "!Select sequence",
-                "!Split sequence",
-                "!Sub sequence scalar",
-              },
-            },
-          },
-				},
-			}
-		end
-		lspconfig["cfn-lsp-extra"].setup({})
+		-- if not configs["cfn-lsp-extra"] then
+		-- 	configs["cfn-lsp-extra"] = {
+		-- 		default_config = {
+		-- 			cmd = { "cfn-lsp-extra" },
+		-- 			filetypes = { "yaml", "yaml.ansible", "yaml.cloudformation", "json.cloudformation" },
+		-- 			root_dir = function(fname)
+  --           return vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true })[1])
+		-- 				-- return lspconfig.util.find_git_ancestor(fname)
+		-- 			end,
+		-- 			settings = {
+  --           yaml = {
+  --             schemaStore = {
+  --               enable = true,
+  --               url = "https://www.schemastore.org/api/json/catalog.json",
+  --             },
+  --             hover = false,
+  --             validate = true,
+  --             customTags = {
+  --               "!And sequence",
+  --               "!Base64 scalar",
+  --               "!Cidr sequence",
+  --               "!Condition",
+  --               "!If sequence",
+  --               "!Equals sequence",
+  --               "!FindInMap sequence",
+  --               "!GetAtt scalar",
+  --               "!GetAZs scalar",
+  --               "!ImportValue scalar",
+  --               "!Join sequence scalar",
+  --               "!Not sequence",
+  --               "!Or sequence",
+  --               "!Ref scalar",
+  --               "!Select sequence",
+  --               "!Split sequence",
+  --               "!Sub sequence scalar",
+  --             },
+  --           },
+  --         },
+		-- 		},
+		-- 	}
+		-- end
+		-- lspconfig["cfn-lsp-extra"].setup({})
   end,
 }

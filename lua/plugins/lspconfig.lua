@@ -81,6 +81,18 @@ return {
         })
       end,
 
+      ["vacuum"] = function()
+        -- configure openapi linter
+        lspconfig["vacuum"].setup({
+          capabilities = capabilities,
+          filetypes = { "swagger.yaml", "swagger.json", "openapi.yaml", "openapi.json" },
+          settings = {
+            enable = true,
+            -- Optionally define custom rules or settings here
+          }
+        })
+      end,
+
       ["ts_ls"] = function()
         -- configure typescript language server
         lspconfig["ts_ls"].setup({

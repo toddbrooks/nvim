@@ -9,6 +9,7 @@ return {
           tf = "terraform",
           tfvars = "terraform",
           tfstate = "json",
+          ["swagger.yaml"] = "yaml.openapi"
         },
       }
     })
