@@ -1,14 +1,51 @@
 return {
-  "catppuccin/nvim",
-  name = "catppuccin",
-  priority = 1000,
-  config = function()
-    vim.cmd("colorscheme catppuccin-mocha")
-    require("catppuccin").setup({
-      colorscheme = "mocha",
-      integrations = {
-        treesitter = true
-      }
-    })
-  end
+  -- add gruvbox
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  -- Configure LazyVim to load gruvbox
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "catppuccin-mocha",
+      opts = {
+        integrations = {
+          aerial = true,
+          alpha = true,
+          cmp = true,
+          dashboard = true,
+          flash = true,
+          fzf = true,
+          grug_far = true,
+          gitsigns = true,
+          headlines = true,
+          illuminate = true,
+          indent_blankline = { enabled = true },
+          leap = true,
+          lsp_trouble = true,
+          mason = true,
+          markdown = true,
+          mini = true,
+          native_lsp = {
+            enabled = true,
+            underlines = {
+              errors = { "undercurl" },
+              hints = { "undercurl" },
+              warnings = { "undercurl" },
+              information = { "undercurl" },
+            },
+          },
+          navic = { enabled = true, custom_bg = "lualine" },
+          neotest = true,
+          neotree = true,
+          noice = true,
+          notify = true,
+          semantic_tokens = true,
+          snacks = true,
+          telescope = true,
+          treesitter = true,
+          treesitter_context = true,
+          which_key = true,
+        },
+      },
+    },
+  },
 }
